@@ -5,8 +5,8 @@ import pygame
 WINDOW_WIDTH = 640
 WINDOW_HEIGHT = 480
 CELL_SIZE = 20
-FPS = 15
-MOVE_INTERVAL_MS = 200
+FPS = 60
+MOVE_INTERVAL_MS = 100
 
 BG_COLOR = (0, 0, 0)
 GRID_COLOR = (40, 40, 40)
@@ -190,14 +190,15 @@ def main():
 
 		# input
 		keys = pygame.key.get_pressed()
-		if keys[pygame.K_UP] or keys[pygame.K_w]:
-			snake.set_direction((0, -1))
-		elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
-			snake.set_direction((0, 1))
-		elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
-			snake.set_direction((-1, 0))
-		elif keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-			snake.set_direction((1, 0))
+		if getattr(snake, 'alive', True):
+			if keys[pygame.K_UP] or keys[pygame.K_w]:
+				snake.set_direction((0, -1))
+			elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
+				snake.set_direction((0, 1))
+			elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
+				snake.set_direction((-1, 0))
+			elif keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+				snake.set_direction((1, 0))
 
 
 		# moving
